@@ -69,8 +69,11 @@ def model_evaluation(
         df: DF,
         sample_name: Literal["train", "test"] = "train",
         metric_name: Literal["rmse"] = "rmse",
-        label_col: Literal["target", "price"] = "target"
+        label_col: Literal["target", "price", "price_m2"] = "target"
 ) -> Dict[str, float]:
+    """
+    Evaluación del modelo. Cálculo rmse
+    """
 
     prediction_df = model.transform(df)
     evaluator = RegressionEvaluator(labelCol=label_col, predictionCol="prediction", metricName=metric_name)
@@ -80,6 +83,9 @@ def model_evaluation(
 
 
 def train_test_split(df: DF, split_value: float = 0.7) -> Tuple[DF, DF]:
+    """
+    División muestra entrenamiento y test
+    """
     train_df, test_df = df.randomSplit([split_value, 1 - split_value])
     logger.info(f"División muestra entrenamiento y validación. Uso de un split de {split_value}")
     return train_df, test_df
