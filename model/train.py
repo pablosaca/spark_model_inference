@@ -14,7 +14,7 @@ logger = get_logger()
 
 def model_train(df: DF) -> PipelineModel:
 
-    # 3. Pipeline de preprocesamiento
+    # Pipeline de preprocesamiento
     indexer = StringIndexer(
         inputCols=[
             "building_type", "object_type",
@@ -55,10 +55,10 @@ def model_train(df: DF) -> PipelineModel:
         featuresCol="features", labelCol="target", elasticNetParam=0.25, maxIter=100, regParam=0.07, solver="normal"
     )
 
-    # Crear pipeline
+    # Creación pipeline
     pipeline = Pipeline(stages=[indexer, encoder, assembler, lr])
 
-    # 4. Entrenar el modelo
+    # Entrenamiento del modelo
     fitted_model = pipeline.fit(df)
     logger.info("Entrenado el modelo")
     return fitted_model

@@ -22,7 +22,6 @@ def spark_session() -> SparkSession:
         SparkSession.builder
         .master("local[*]")  # IMPORTANTE: Forzar modo local
         .appName("Modelización spark local")
-     #   .config("spark.jars.packages", "ml.combust.mleap:mleap-spark_2.12:0.23.0")
         .config("spark.driver.host", "127.0.0.1")  # identificamos la IP local
         .config("spark.bindAddress", "127.0.0.1")
         .config("spark.driver.memory", "8g")  # fijamos memoria en driver y executor por si se nos peta
